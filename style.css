@@ -1,0 +1,152 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center; 
+    align-items: center;     
+    padding: 20px;
+}
+
+
+.todo-container {
+    background-color: #ffffff;
+    width: 100%;
+    max-width: 500px; 
+    border-radius: 16px; 
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+}
+
+
+h1 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 25px;
+    font-size: 1.7rem;
+    font-weight: 600;
+}
+
+
+.input-section {
+    display: flex;
+    gap: 10px; 
+    margin-bottom: 30px;
+}
+
+
+.task-input {
+    flex: 1; 
+    padding: 12px 15px;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.task-input:focus {
+    border-color: #6c5ce7; 
+}
+
+
+.add-btn {
+    background-color: #6c5ce7;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.1s;
+}
+
+.add-btn:hover {
+    background-color: #5b4bc4; 
+}
+
+.add-btn:active {
+    transform: scale(0.96); 
+}
+
+
+.task-list {
+    list-style: none; 
+}
+
+
+.task-item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    background-color: #f8fafc;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    transition: background-color 0.2s, transform 0.2s;
+    border: 1px solid transparent;
+}
+
+.task-item:hover {
+    background-color: #f1f5f9;
+    border-color: #e2e8f0;
+    transform: translateX(4px); 
+}
+
+
+.task-check {
+    margin-right: 15px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: #6c5ce7; 
+}
+
+
+.task-text {
+    flex: 1; 
+    font-size: 1.05rem;
+    color: #334155;
+    word-break: break-word; 
+}
+
+
+
+
+.delete-btn {
+    background: none;
+    border: none;
+    color: #ef4444; 
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 5px;
+    opacity: 0.7;
+    transition: transform 0.2s, opacity 0.2s;
+}
+
+.delete-btn:hover {
+    opacity: 1;
+    transform: scale(1.15); 
+}
+
+
+@media (max-width: 480px) {
+    .todo-container {
+        padding: 20px;
+    }
+
+    .input-section {
+        flex-direction: column; 
+    }
+    
+    .add-btn {
+        width: 100%; 
+    }
+}
