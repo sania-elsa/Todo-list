@@ -150,3 +150,45 @@ h1 {
         width: 100%; 
     }
 }
+
+.theme-toggle {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+}
+
+#theme-btn {
+    border: none;
+    background-color: #6c5ce7;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.dark-mode {
+    background: #121212;
+}
+
+.dark-mode .todo-container {
+    background: #1e1e1e;
+}
+
+.dark-mode h1,
+.dark-mode .task-text {
+    color: white;
+}
+
+.dark-mode .task-item {
+    background-color: #2a2a2a;
+}
+
+.dark-mode .task-input {
+    background-color: #333;
+    color: white;
+    border-color: #555;
+}
+
+.dark-mode .task-input::placeholder {
+    color: #bbb;
+}

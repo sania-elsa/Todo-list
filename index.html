@@ -5,49 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To-Do List</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Using Google Fonts for better typography -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
+
     <div class="todo-container">
-        <h1>To-Do List</h1>
-        
-        <div class="input-section">
-            <input type="text" placeholder="Enter a task" class="task-input">
-            <button class="add-btn">Add Task</button>
+
+        <div class="theme-toggle">
+            <button id="theme-btn">
+                <i class="fa-solid fa-moon"></i>
+            </button>
         </div>
-        
-        <ul class="task-list">
-            <li class="task-item">
-                <input type="checkbox" class="task-check">
-                <span class="task-text">Buy groceries</span>
-                <button class="delete-btn" aria-label="Delete">X</button>
-            </li>
-            
-            <li class="task-item">
-                <input type="checkbox" class="task-check">
-                <span class="task-text">Walk the dog</span>
-                <button class="delete-btn" aria-label="Delete">X</button>
-            </li>
-            
-            <li class="task-item">
-                <input type="checkbox" class="task-check">
-                <span class="task-text">Finish CSS styling</span>
-                <button class="delete-btn" aria-label="Delete">X</button>
-            </li>
-            
-            <li class="task-item">
-                <input type="checkbox" class="task-check">
-                <span class="task-text">Read a book</span>
-                <button class="delete-btn" aria-label="Delete">X</button>
-            </li>
-            
-            <li class="task-item">
-                <input type="checkbox" class="task-check">
-                <span class="task-text">Call mom</span>
-                <button class="delete-btn" aria-label="Delete">X</button>
-            </li>
-        </ul>
+
+        <h1>To-Do List</h1>
+
+        <div class="input-section">
+            <input type="text" id="task-input" placeholder="Enter a task" class="task-input">
+            <button id="add-btn" class="add-btn">Add Task</button>
+        </div>
+
+        <ul id="task-list" class="task-list"></ul>
+
     </div>
+
+    <script src="script.js"></script>
+
 </body>
 </html>
+
