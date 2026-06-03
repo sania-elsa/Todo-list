@@ -2,6 +2,7 @@ const taskInput = document.getElementById("task-input");
 const addBtn = document.getElementById("add-btn");
 const taskList = document.getElementById("task-list");
 const themeBtn = document.getElementById("theme-btn");
+const prioritySelect = document.getElementById("priority-select");
 
 let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
@@ -10,11 +11,13 @@ function saveTasks() {
     localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
-/* Display Tasks */
+/* Render Tasks */
 function renderTasks() {
+
     taskList.innerHTML = "";
 
     tasks.forEach((task, index) => {
+
         const li = document.createElement("li");
 
         li.className = task.completed
@@ -22,8 +25,21 @@ function renderTasks() {
             : "task-item";
 
         li.innerHTML = `
-            <input type="checkbox" class="task-check" ${task.completed ? "checked" : ""}>
-            <span class="task-text">${task.text}</span>
+            <input type="checkbox" class="task-check"
+                ${task.completed ? "checked" : ""}>
+
+            <div class="task-content">
+                <span class="task-text">${task.text}</span>
+
+                <span class="priority ${(task.priority || "Medium").toLowerCase()}">
+                    ${task.priority || "Medium"} Priority
+                </span>
+
+                <span class="task-time">
+                    Added: ${task.createdAt}
+                </span>
+            </div>
+
             <button class="delete-btn">🗑️</button>
         `;
 
@@ -48,13 +64,16 @@ function renderTasks() {
 
 /* Add Task */
 addBtn.addEventListener("click", () => {
+
     const taskText = taskInput.value.trim();
 
     if (taskText === "") return;
 
     tasks.push({
         text: taskText,
-        completed: false
+        completed: false,
+        priority: prioritySelect.value,
+        createdAt: new Date().toLocaleString()
     });
 
     saveTasks();
@@ -63,28 +82,32 @@ addBtn.addEventListener("click", () => {
     taskInput.value = "";
 });
 
-/* Add Task using Enter Key */
+/* Enter Key */
 taskInput.addEventListener("keypress", (e) => {
     if (e.key === "Enter") {
         addBtn.click();
     }
 });
 
-/* Dark Mode */
-
-
+/* Theme Icon */
 function updateThemeIcon() {
+
     if (document.body.classList.contains("dark-mode")) {
-        themeBtn.innerHTML = '<i class="fa-solid fa-sun"></i>';
+        themeBtn.innerHTML =
+            '<i class="fa-solid fa-sun"></i>';
     } else {
-        themeBtn.innerHTML = '<i class="fa-solid fa-moon"></i>';
+        themeBtn.innerHTML =
+            '<i class="fa-solid fa-moon"></i>';
     }
 }
 
+/* Theme Toggle */
 themeBtn.addEventListener("click", () => {
+
     document.body.classList.toggle("dark-mode");
 
-    const currentTheme = document.body.classList.contains("dark-mode")
+    const currentTheme =
+        document.body.classList.contains("dark-mode")
         ? "dark"
         : "light";
 
@@ -93,13 +116,7 @@ themeBtn.addEventListener("click", () => {
     updateThemeIcon();
 });
 
-if (localStorage.getItem("theme") === "dark") {
-    document.body.classList.add("dark-mode");
-}
-
-updateThemeIcon();
-
-/* Load Saved Theme */
+/* Load Theme */
 if (localStorage.getItem("theme") === "dark") {
     document.body.classList.add("dark-mode");
 }
@@ -108,5 +125,3 @@ updateThemeIcon();
 
 /* Initial Render */
 renderTasks();
-
-

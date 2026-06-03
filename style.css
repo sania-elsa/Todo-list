@@ -19,7 +19,7 @@ body {
 .todo-container {
     background-color: #ffffff;
     width: 100%;
-    max-width: 500px; 
+    max-width: 600px; 
     border-radius: 16px; 
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     padding: 30px;
@@ -191,4 +191,56 @@ h1 {
 
 .dark-mode .task-input::placeholder {
     color: #bbb;
+}
+
+.priority-select{
+    padding:12px;
+    border:2px solid #e2e8f0;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.task-content{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+}
+
+.task-time{
+    font-size:0.75rem;
+    color:#888;
+    margin-top:4px;
+}
+
+.priority{
+    font-size:0.8rem;
+    font-weight:600;
+    margin-top:4px;
+}
+
+.high{
+    color:#ef4444;
+}
+
+.medium{
+    color:#f59e0b;
+}
+
+.low{
+    color:#10b981;
+}
+
+.completed .task-text{
+    text-decoration: line-through;
+    color:#94a3b8;
+}
+
+.dark-mode .task-time{
+    color:#cbd5e1;
+}
+
+.dark-mode .priority-select{
+    background:#333;
+    color:white;
+    border-color:#555;
 }
