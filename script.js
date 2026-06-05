@@ -3,26 +3,63 @@ const addBtn = document.getElementById("add-btn");
 const taskList = document.getElementById("task-list");
 const themeBtn = document.getElementById("theme-btn");
 const prioritySelect = document.getElementById("priority-select");
+const tabBtns = document.querySelectorAll(".tab-btn");
 
 let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+let currentCategory = "Personal";
+
+// Ensure all tasks have an ID and a category
+tasks = tasks.map(task => ({
+    ...task,
+    id: task.id || Date.now().toString() + Math.random().toString(36).substring(2, 9),
+    category: task.category || "Personal"
+}));
 
 /* Save Tasks */
 function saveTasks() {
     localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
+/* Handle Tabs */
+tabBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+        tabBtns.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        currentCategory = btn.dataset.category;
+        renderTasks();
+    });
+});
+
 /* Render Tasks */
 function renderTasks() {
 
     taskList.innerHTML = "";
 
-    tasks.forEach((task, index) => {
+    // Filter by category
+    let filteredTasks = tasks.filter(task => task.category === currentCategory);
+
+    // Sort tasks: incomplete first, then completed
+    filteredTasks.sort((a, b) => {
+        if (a.completed === b.completed) return 0;
+        return a.completed ? 1 : -1;
+    });
+
+    filteredTasks.forEach((task) => {
 
         const li = document.createElement("li");
 
         li.className = task.completed
             ? "task-item completed"
             : "task-item";
+
+        // Determine tag text and class
+        let tagText = task.priority || "Important";
+        let tagClass = (task.priority || "important").toLowerCase().replace(" ", "-");
+        
+        if (task.completed) {
+            tagText = "Done";
+            tagClass = "done";
+        }
 
         li.innerHTML = `
             <input type="checkbox" class="task-check"
@@ -31,8 +68,8 @@ function renderTasks() {
             <div class="task-content">
                 <span class="task-text">${task.text}</span>
 
-                <span class="priority ${(task.priority || "Medium").toLowerCase()}">
-                    ${task.priority || "Medium"} Priority
+                <span class="priority ${tagClass}">
+                    ${tagText}
                 </span>
 
                 <span class="task-time">
@@ -40,22 +77,28 @@ function renderTasks() {
                 </span>
             </div>
 
-            <button class="delete-btn">🗑️</button>
+            <button class="delete-btn">X</button>
         `;
 
         const checkbox = li.querySelector(".task-check");
         const deleteBtn = li.querySelector(".delete-btn");
 
         checkbox.addEventListener("change", () => {
-            tasks[index].completed = checkbox.checked;
-            saveTasks();
-            renderTasks();
+            const taskIndex = tasks.findIndex(t => t.id === task.id);
+            if (taskIndex !== -1) {
+                tasks[taskIndex].completed = checkbox.checked;
+                saveTasks();
+                renderTasks();
+            }
         });
 
         deleteBtn.addEventListener("click", () => {
-            tasks.splice(index, 1);
-            saveTasks();
-            renderTasks();
+            const taskIndex = tasks.findIndex(t => t.id === task.id);
+            if (taskIndex !== -1) {
+                tasks.splice(taskIndex, 1);
+                saveTasks();
+                renderTasks();
+            }
         });
 
         taskList.appendChild(li);
@@ -70,9 +113,11 @@ addBtn.addEventListener("click", () => {
     if (taskText === "") return;
 
     tasks.push({
+        id: Date.now().toString() + Math.random().toString(36).substring(2, 9),
         text: taskText,
         completed: false,
         priority: prioritySelect.value,
+        category: currentCategory,
         createdAt: new Date().toLocaleString()
     });
 
@@ -125,3 +170,4 @@ updateThemeIcon();
 
 /* Initial Render */
 renderTasks();
+
