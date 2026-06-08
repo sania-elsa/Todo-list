@@ -8,19 +8,19 @@ const tabBtns = document.querySelectorAll(".tab-btn");
 let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 let currentCategory = "Personal";
 
-// Ensure all tasks have an ID and a category
+
 tasks = tasks.map(task => ({
     ...task,
     id: task.id || Date.now().toString() + Math.random().toString(36).substring(2, 9),
     category: task.category || "Personal"
 }));
 
-/* Save Tasks */
+
 function saveTasks() {
     localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
-/* Handle Tabs */
+
 tabBtns.forEach(btn => {
     btn.addEventListener("click", () => {
         tabBtns.forEach(b => b.classList.remove("active"));
@@ -30,15 +30,15 @@ tabBtns.forEach(btn => {
     });
 });
 
-/* Render Tasks */
+
 function renderTasks() {
 
     taskList.innerHTML = "";
 
-    // Filter by category
+    
     let filteredTasks = tasks.filter(task => task.category === currentCategory);
 
-    // Sort tasks: incomplete first, then completed
+    
     filteredTasks.sort((a, b) => {
         if (a.completed === b.completed) return 0;
         return a.completed ? 1 : -1;
@@ -52,7 +52,7 @@ function renderTasks() {
             ? "task-item completed"
             : "task-item";
 
-        // Determine tag text and class
+        
         let tagText = task.priority || "Important";
         let tagClass = (task.priority || "important").toLowerCase().replace(" ", "-");
         
@@ -105,7 +105,7 @@ function renderTasks() {
     });
 }
 
-/* Add Task */
+
 addBtn.addEventListener("click", () => {
 
     const taskText = taskInput.value.trim();
@@ -127,14 +127,14 @@ addBtn.addEventListener("click", () => {
     taskInput.value = "";
 });
 
-/* Enter Key */
+
 taskInput.addEventListener("keypress", (e) => {
     if (e.key === "Enter") {
         addBtn.click();
     }
 });
 
-/* Theme Icon */
+
 function updateThemeIcon() {
 
     if (document.body.classList.contains("dark-mode")) {
@@ -146,7 +146,7 @@ function updateThemeIcon() {
     }
 }
 
-/* Theme Toggle */
+
 themeBtn.addEventListener("click", () => {
 
     document.body.classList.toggle("dark-mode");
@@ -161,13 +161,13 @@ themeBtn.addEventListener("click", () => {
     updateThemeIcon();
 });
 
-/* Load Theme */
+
 if (localStorage.getItem("theme") === "dark") {
     document.body.classList.add("dark-mode");
 }
 
 updateThemeIcon();
 
-/* Initial Render */
+
 renderTasks();
 
