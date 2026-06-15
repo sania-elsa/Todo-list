@@ -1,9 +1,21 @@
+
+$primary-color: #6c5ce7;
+$primary-hover: #5b4bc4;
+$light-bg: #ffffff;
+$dark-bg: #1e1e1e;
+$text-dark: #334155;
+$text-light: white;
+$border-color: #e2e8f0;
+
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
+
 
 body {
   background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
@@ -14,14 +26,16 @@ body {
   padding: 20px;
 }
 
+
 .todo-container {
-  background-color: #ffffff;
+  background-color: $light-bg;
   width: 100%;
   max-width: 600px;
   border-radius: 16px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   padding: 30px;
 }
+
 
 h1 {
   text-align: center;
@@ -30,6 +44,7 @@ h1 {
   font-size: 1.7rem;
   font-weight: 600;
 }
+
 
 .input-section {
   display: flex;
@@ -40,18 +55,20 @@ h1 {
 .task-input {
   flex: 1;
   padding: 12px 15px;
-  border: 2px solid #e2e8f0;
+  border: 2px solid $border-color;
   border-radius: 8px;
   font-size: 1rem;
   outline: none;
   transition: border-color 0.3s ease;
-}
-.task-input:focus {
-  border-color: #6c5ce7;
+
+  &:focus {
+    border-color: $primary-color;
+  }
 }
 
+
 .add-btn {
-  background-color: #6c5ce7;
+  background-color: $primary-color;
   color: white;
   border: none;
   padding: 12px 20px;
@@ -60,12 +77,14 @@ h1 {
   font-weight: 500;
   cursor: pointer;
   transition: background-color 0.3s, transform 0.1s;
-}
-.add-btn:hover {
-  background-color: #5b4bc4;
-}
-.add-btn:active {
-  transform: scale(0.96);
+
+  &:hover {
+    background-color: $primary-hover;
+  }
+
+  &:active {
+    transform: scale(0.96);
+  }
 }
 
 .theme-toggle {
@@ -76,12 +95,13 @@ h1 {
 
 #theme-btn {
   border: none;
-  background-color: #6c5ce7;
+  background-color: $primary-color;
   color: white;
   padding: 8px 12px;
   border-radius: 8px;
   cursor: pointer;
 }
+
 
 .task-list {
   list-style: none;
@@ -96,11 +116,12 @@ h1 {
   margin-bottom: 12px;
   transition: background-color 0.2s, transform 0.2s;
   border: 1px solid transparent;
-}
-.task-item:hover {
-  background-color: #f1f5f9;
-  border-color: #e2e8f0;
-  transform: translateX(4px);
+
+  &:hover {
+    background-color: #f1f5f9;
+    border-color: $border-color;
+    transform: translateX(4px);
+  }
 }
 
 .task-check {
@@ -108,7 +129,7 @@ h1 {
   width: 20px;
   height: 20px;
   cursor: pointer;
-  accent-color: #6c5ce7;
+  accent-color: $primary-color;
 }
 
 .task-content {
@@ -120,7 +141,7 @@ h1 {
 .task-text {
   flex: 1;
   font-size: 1.05rem;
-  color: #334155;
+  color: $text-dark;
   word-break: break-word;
 }
 
@@ -130,10 +151,13 @@ h1 {
   margin-top: 4px;
 }
 
-.completed .task-text {
-  text-decoration: line-through;
-  color: #94a3b8;
+.completed {
+  .task-text {
+    text-decoration: line-through;
+    color: #94a3b8;
+  }
 }
+
 
 .delete-btn {
   background: none;
@@ -144,18 +168,21 @@ h1 {
   padding: 5px;
   opacity: 0.7;
   transition: transform 0.2s, opacity 0.2s;
+
+  &:hover {
+    opacity: 1;
+    transform: scale(1.15);
+  }
 }
-.delete-btn:hover {
-  opacity: 1;
-  transform: scale(1.15);
-}
+
 
 .priority-select {
   padding: 12px;
-  border: 2px solid #e2e8f0;
+  border: 2px solid $border-color;
   border-radius: 8px;
   cursor: pointer;
 }
+
 
 .category-tabs {
   display: flex;
@@ -175,14 +202,17 @@ h1 {
   padding: 8px 16px;
   border-radius: 8px;
   transition: all 0.3s ease;
+
+  &:hover {
+    background-color: #f1f5f9;
+  }
+
+  &.active {
+    color: $primary-color;
+    background-color: #eef2ff;
+  }
 }
-.tab-btn:hover {
-  background-color: #f1f5f9;
-}
-.tab-btn.active {
-  color: #6c5ce7;
-  background-color: #eef2ff;
-}
+
 
 .priority {
   font-size: 0.8rem;
@@ -212,56 +242,71 @@ h1 {
   background-color: #54a0ff;
 }
 
+
 .dark-mode {
   background: #121212;
+
+  .todo-container {
+    background: $dark-bg;
+  }
+
+  h1,
+  .task-text {
+    color: $text-light;
+  }
+
+  .task-item {
+    background-color: #2a2a2a;
+  }
+
+  .task-input {
+    background-color: #333;
+    color: white;
+    border-color: #555;
+
+    &::placeholder {
+      color: #bbb;
+    }
+  }
+
+  .task-time {
+    color: #cbd5e1;
+  }
+
+  .priority-select {
+    background: #333;
+    color: white;
+    border-color: #555;
+  }
+
+  .category-tabs {
+    border-bottom-color: #333;
+  }
+
+  .tab-btn {
+    color: #9ca3af;
+
+    &:hover {
+      background-color: #333;
+    }
+
+    &.active {
+      color: #a29bfe;
+      background-color: #2d3748;
+    }
+  }
 }
-.dark-mode .todo-container {
-  background: #1e1e1e;
-}
-.dark-mode h1,
-.dark-mode .task-text {
-  color: white;
-}
-.dark-mode .task-item {
-  background-color: #2a2a2a;
-}
-.dark-mode .task-input {
-  background-color: #333;
-  color: white;
-  border-color: #555;
-}
-.dark-mode .task-input::placeholder {
-  color: #bbb;
-}
-.dark-mode .task-time {
-  color: #cbd5e1;
-}
-.dark-mode .priority-select {
-  background: #333;
-  color: white;
-  border-color: #555;
-}
-.dark-mode .category-tabs {
-  border-bottom-color: #333;
-}
-.dark-mode .tab-btn {
-  color: #9ca3af;
-}
-.dark-mode .tab-btn:hover {
-  background-color: #333;
-}
-.dark-mode .tab-btn.active {
-  color: #a29bfe;
-  background-color: #2d3748;
-}
+
 
 @media (max-width: 480px) {
   .todo-container {
     padding: 20px;
   }
+
   .input-section {
     flex-direction: column;
   }
+
   .add-btn {
     width: 100%;
   }
