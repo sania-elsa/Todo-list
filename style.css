@@ -102,6 +102,10 @@ h1 {
   border-color: #e2e8f0;
   transform: translateX(4px);
 }
+.task-item:focus {
+  outline: 2px solid #6c5ce7;
+  outline-offset: 2px;
+}
 
 .task-check {
   margin-right: 15px;
@@ -157,15 +161,31 @@ h1 {
   cursor: pointer;
 }
 
-.category-tabs {
+.workspace-header {
   display: flex;
-  gap: 10px;
+  align-items: center;
   margin-bottom: 20px;
   border-bottom: 2px solid #f1f5f9;
   padding-bottom: 10px;
+  gap: 10px;
+}
+
+.category-tabs {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  flex: 1;
+}
+.category-tabs::-webkit-scrollbar {
+  display: none;
 }
 
 .tab-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
   background: none;
   border: none;
   font-size: 1rem;
@@ -182,6 +202,79 @@ h1 {
 .tab-btn.active {
   color: #6c5ce7;
   background-color: #eef2ff;
+}
+
+.workspace-name {
+  pointer-events: none;
+}
+
+.workspace-delete-btn {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  padding: 2px;
+  font-size: 0.8rem;
+  transition: color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.workspace-delete-btn:hover {
+  color: #ef4444;
+}
+
+.tab-btn.active .workspace-delete-btn {
+  color: #818cf8;
+}
+.tab-btn.active .workspace-delete-btn:hover {
+  color: #ef4444;
+}
+
+.workspace-edit-input {
+  background: transparent;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  padding: 2px 4px;
+  outline: none;
+  width: 120px;
+}
+.workspace-edit-input:focus {
+  border-color: #6c5ce7;
+}
+
+.task-edit-input {
+  flex: 1;
+  font-size: 1.05rem;
+  color: #334155;
+  background: white;
+  border: 1px solid #6c5ce7;
+  border-radius: 4px;
+  padding: 2px 4px;
+  outline: none;
+  width: 100%;
+}
+
+.add-workspace-btn {
+  background: none;
+  border: none;
+  color: #64748b;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.add-workspace-btn:hover {
+  background-color: #f1f5f9;
+  color: #6c5ce7;
 }
 
 .priority {
@@ -241,7 +334,7 @@ h1 {
   color: white;
   border-color: #555;
 }
-.dark-mode .category-tabs {
+.dark-mode .workspace-header {
   border-bottom-color: #333;
 }
 .dark-mode .tab-btn {
@@ -253,6 +346,25 @@ h1 {
 .dark-mode .tab-btn.active {
   color: #a29bfe;
   background-color: #2d3748;
+}
+.dark-mode .add-workspace-btn {
+  color: #9ca3af;
+}
+.dark-mode .add-workspace-btn:hover {
+  background-color: #333;
+  color: #a29bfe;
+}
+.dark-mode .workspace-edit-input {
+  border-color: #555;
+  color: white;
+}
+.dark-mode .workspace-edit-input:focus {
+  border-color: #a29bfe;
+}
+.dark-mode .task-edit-input {
+  background: #333;
+  color: white;
+  border-color: #a29bfe;
 }
 
 @media (max-width: 480px) {
